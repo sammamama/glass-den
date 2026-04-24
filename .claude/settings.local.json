@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(powershell -Command \"Expand-Archive -Path '1.zip' -DestinationPath './extracted_1' -Force\")",
+      "Bash(powershell -Command \"Expand-Archive -Path '2.zip' -DestinationPath './extracted_2' -Force\")",
+      "Bash(mkdir -p frames)",
+      "Bash(powershell -Command ' *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version'\\)\\); print\\(list\\(d.get\\('exports',{}\\).keys\\(\\)\\)[:10]\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version'\\)\\)\")",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(taskkill /PID 12012 /F)",
+      "PowerShell(Stop-Process -Id 12012 -Force)"
+    ]
+  }
+}
