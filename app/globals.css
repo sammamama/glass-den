@@ -29,10 +29,12 @@
   --font-sans: var(--font-body);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
@@ -77,4 +79,14 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
+@keyframes speen {
+  0%   { transform: rotate(10deg); }
+  50%  { transform: rotate(190deg); }
+  100% { transform: rotate(370deg); }
+}
+@keyframes woah {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(0.75); }
 }

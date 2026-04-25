@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'motion/react';
 import gsap from 'gsap';
 import Lenis from 'lenis';
+import { GlowButton } from '@/app/components/ui/shiny-button-1';
 
 const TOTAL_FRAMES = 242;
 const ZOOM_FACTOR = 1.05;
@@ -35,13 +36,19 @@ export default function CinematicHero() {
   const currentFrameRef = useRef(0);
   const rafRef       = useRef<number | null>(null);
   const lenisRef     = useRef<Lenis | null>(null);
+  const stickyRef    = useRef<HTMLDivElement>(null);
   // Parallax offset drawn into canvas — no CSS transform on canvas
   const parallaxRef  = useRef({ x: 0, y: 0 });
 
   // DOM refs for scroll-driven opacity (no re-renders)
-  const overlayRef   = useRef<HTMLDivElement>(null);
-  const heroTextRef  = useRef<HTMLDivElement>(null);
-  const glassBoxRef  = useRef<HTMLDivElement>(null);
+  const overlayRef        = useRef<HTMLDivElement>(null);
+  const heroTextRef       = useRef<HTMLDivElement>(null);
+  const glassBoxRef       = useRef<HTMLDivElement>(null);
+  const timelineFillRef   = useRef<HTMLDivElement>(null);
+  const prisonDotRef      = useRef<HTMLDivElement>(null);
+  const cafeDotRef        = useRef<HTMLDivElement>(null);
+  const prisonLabelRef    = useRef<HTMLSpanElement>(null);
+  const cafeLabelRef      = useRef<HTMLSpanElement>(null);
 
   const [loaded, setLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -135,7 +142,7 @@ export default function CinematicHero() {
   useEffect(() => {
     if (!loaded) return;
 
-    const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.14, smoothWheel: true });
     lenisRef.current = lenis;
 
     lenis.on('scroll', ({ scroll }: { scroll: number }) => {
@@ -176,6 +183,31 @@ export default function CinematicHero() {
         glassBoxRef.current.style.opacity = String(op);
         glassBoxRef.current.style.transform = `translateY(${translateY}px)`;
         glassBoxRef.current.style.pointerEvents = op < 0.05 ? 'none' : 'auto';
+      }
+
+      // Timeline — Prison (0) → Cafe (90)
+      if (timelineFillRef.current) {
+        const pct = mapRange(f, 0, 90, 0, 100);
+        timelineFillRef.current.style.height = `${pct}%`;
+      }
+      if (prisonDotRef.current) {
+        prisonDotRef.current.style.background = '#fff';
+      }
+      if (cafeDotRef.current) {
+        const active = f >= 90;
+        cafeDotRef.current.style.background = active ? '#fff' : 'transparent';
+      }
+      if (prisonLabelRef.current) {
+        prisonLabelRef.current.style.opacity = f < 90 ? '1' : '0.4';
+      }
+      if (cafeLabelRef.current) {
+        cafeLabelRef.current.style.opacity = f >= 90 ? '1' : String(mapRange(f, 0, 90, 0.4, 1));
+      }
+
+      // Curtain exit — hero slides up over the last 18% of its scroll range
+      if (stickyRef.current) {
+        const curtainY = mapRange(scroll, maxScroll * 0.82, maxScroll, 0, -window.innerHeight);
+        stickyRef.current.style.transform = `translateY(${curtainY}px)`;
       }
     });
 
@@ -227,7 +259,7 @@ export default function CinematicHero() {
         >
           <p
             className="text-sm tracking-[0.25em] uppercase mb-8"
-            style={{ color: 'hsl(240 4% 66%)', fontFamily: 'var(--font-body)' }}
+            style={{ color: 'hsl(240 4% 66%)', fontFamily: "'Instrument Serif', serif", }}
           >
             Loading Den Experience
           </p>
@@ -244,10 +276,10 @@ export default function CinematicHero() {
       )}
 
       {/* Main scrollable container */}
-      <div ref={containerRef} style={{ height: '500vh', background: '#000' }}>
+      <div ref={containerRef} style={{ height: '500vh', position: 'relative', zIndex: 2, pointerEvents: 'none' }}>
 
         {/* Sticky viewport */}
-        <div className="sticky top-0 h-screen overflow-hidden">
+        <div ref={stickyRef} className="sticky top-0 h-screen overflow-hidden" style={{ background: '#000', willChange: 'transform', pointerEvents: 'auto' }}>
 
           {/* Canvas */}
           <canvas
@@ -266,51 +298,55 @@ export default function CinematicHero() {
             }}
           />
 
+          {/* Timeline — left edge, vertically centred */}
+          {loaded && (
+            <div className="hidden sm:flex absolute left-14 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-0" style={{ pointerEvents: 'none' }}>
+              {/* Prison label + dot */}
+              <div className="flex items-center gap-4">
+                <span
+                  ref={prisonLabelRef}
+                  className="text-base tracking-widest uppercase"
+                  style={{ fontFamily: "'Instrument Serif', serif", color: '#fff', opacity: 1, transition: 'opacity 0.3s' }}
+                >
+                  Prison
+                </span>
+                <div
+                  ref={prisonDotRef}
+                  className="w-3 h-3 rounded-full border-2 border-white"
+                  style={{ background: '#fff', flexShrink: 0 }}
+                />
+              </div>
+
+              {/* Track */}
+              <div className="relative bg-white/20" style={{ width: 2, height: 80, alignSelf: 'flex-end' }}>
+                <div
+                  ref={timelineFillRef}
+                  className="absolute top-0 left-0 w-full"
+                  style={{ height: '0%', background: '#fff', transition: 'height 0.1s linear' }}
+                />
+              </div>
+
+              {/* Cafe label + dot */}
+              <div className="flex items-center gap-4">
+                <span
+                  ref={cafeLabelRef}
+                  className="text-base tracking-widest uppercase"
+                  style={{ fontFamily: "'Instrument Serif', serif", color: '#fff', opacity: 0.4, transition: 'opacity 0.3s' }}
+                >
+                  Cafe
+                </span>
+                <div
+                  ref={cafeDotRef}
+                  className="w-3 h-3 rounded-full border-2 border-white"
+                  style={{ background: 'transparent', flexShrink: 0 }}
+                />
+              </div>
+            </div>
+          )}
+
           {/* UI layer */}
           {loaded && (
             <div className="relative z-10 flex flex-col h-full">
-
-              {/* Navigation */}
-              <motion.nav
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: 'easeInOut' }}
-                className="flex flex-row justify-between items-center px-8 py-6 max-w-7xl mx-auto w-full"
-              >
-                <span
-                  className="text-3xl tracking-tight"
-                  style={{ fontFamily: "'Instrument Serif', serif", color: 'hsl(var(--foreground))' }}
-                >
-                  Velorah<sup className="text-xs">®</sup>
-                </span>
-
-                <div className="hidden md:flex items-center gap-8">
-                  {['Home', 'Studio', 'About', 'Journal', 'Reach Us'].map((link, i) => (
-                    <a
-                      key={link}
-                      href="#"
-                      className="text-sm transition-colors duration-200"
-                      style={{
-                        color: i === 0 ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))',
-                        fontFamily: 'var(--font-body)',
-                      }}
-                      onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'hsl(var(--foreground))')}
-                      onMouseLeave={(e) => {
-                        if (i !== 0) (e.target as HTMLElement).style.color = 'hsl(var(--muted-foreground))';
-                      }}
-                    >
-                      {link}
-                    </a>
-                  ))}
-                </div>
-
-                <button
-                  className="liquid-glass rounded-full px-6 py-2.5 text-sm transition-transform duration-200 hover:scale-[1.03]"
-                  style={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-body)', cursor: 'pointer' }}
-                >
-                  Begin Journey
-                </button>
-              </motion.nav>
 
               {/* Center area — hero text + glass box stacked */}
               <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
@@ -325,7 +361,7 @@ export default function CinematicHero() {
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, ease: 'easeInOut' }}
-                    className="text-5xl sm:text-7xl md:text-8xl font-normal max-w-7xl"
+                    className="text-6xl sm:text-8xl md:text-9xl font-normal max-w-7xl"
                     style={{
                       fontFamily: "'Instrument Serif', serif",
                       lineHeight: 0.95,
@@ -355,23 +391,24 @@ export default function CinematicHero() {
                     opacity: 0,
                     pointerEvents: 'none',
                     transform: 'translateY(32px)',
+                    willChange: 'opacity, transform',
                   }}
                 >
                   <div
-                    className="liquid-glass rounded-3xl px-14 py-16 flex flex-col items-center justify-center text-center max-w-2xl w-full"
+                    className="liquid-glass rounded-3xl px-16 py-20 sm:px-14 sm:py-16 flex flex-col items-center justify-center text-center max-w-[85vw] sm:max-w-2xl w-full"
                     style={{
                       background: 'rgba(255,255,255,0.04)',
                       backdropFilter: 'blur(64px)',
                       WebkitBackdropFilter: 'blur(64px)',
                       boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.12), 0 32px 80px rgba(0,0,0,0.55)',
+                      transform: 'translateZ(0)',
+                      willChange: 'backdrop-filter',
                     }}
                   >
                     <h1
-                      className="font-normal pb-10"
+                      className="font-normal pb-10 text-6xl md:text-8xl "
                       style={{
                         fontFamily: "'Instrument Serif', serif",
-                        fontSize: 'clamp(2.8rem, 6vw, 5rem)',
-                        lineHeight: 1.25,
                         color: 'hsl(var(--foreground))',
                         letterSpacing: '-1.5px',
                       }}
@@ -379,44 +416,17 @@ export default function CinematicHero() {
                       Prison Experience <br /> in a Cafe
                     </h1>
 
-                    <div className="flex flex-col sm:flex-row gap-4 mt-14 w-full sm:w-auto">
-                      {/* Primary — solid white */}
-                      <button
-                        className="group relative rounded-full text-base font-medium overflow-hidden"
-                        style={{
-                          background: 'hsl(var(--foreground))',
-                          color: 'hsl(var(--primary-foreground))',
-                          fontFamily: 'var(--font-body)',
-                          cursor: 'pointer',
-                          padding: '1rem 3rem',
-                          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)';
-                          (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(255,255,255,0.3)';
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
-                          (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                        }}
-                        onMouseDown={(e) => {
-                          (e.currentTarget as HTMLElement).style.transform = 'scale(0.97)';
-                        }}
-                        onMouseUp={(e) => {
-                          (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)';
-                        }}
-                      >
-                        Book a Table
-                      </button>
+                    <div className="flex flex-col md:flex-row gap-2 md:gap-4 justify-center mt-5 w-full sm:w-full">
+                      <div className="block sm:hidden w-full"><GlowButton small fullWidth>Book a Table</GlowButton></div>
+                      <div className="hidden sm:block"><GlowButton>Book a Table</GlowButton></div>
 
                       {/* Secondary — glass */}
                       <button
-                        className="liquid-glass rounded-full text-base font-medium"
+                        className="liquid-glass rounded-full text-xs font-medium px-2 py-1.5 sm:text-base sm:px-10 sm:py-3"
                         style={{
                           color: 'hsl(var(--foreground))',
                           fontFamily: 'var(--font-body)',
                           cursor: 'pointer',
-                          padding: '1rem 3rem',
                           transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                         }}
                         onMouseEnter={(e) => {
