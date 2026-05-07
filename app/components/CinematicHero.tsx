@@ -21,7 +21,7 @@ function padNum(n: number) {
 }
 
 function getFrameSrc(index: number) {
-  return `/frames/frame_${padNum(index + 1)}.jpg`;
+  return `/frames/frame_${padNum(index + 1)}.webp`;
 }
 
 function mapRange(val: number, inMin: number, inMax: number, outMin: number, outMax: number) {
