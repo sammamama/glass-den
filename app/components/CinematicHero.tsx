@@ -53,6 +53,11 @@ export default function CinematicHero() {
   const [loaded, setLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
 
+  const scrollToSection = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
   // Preload all frames
   useEffect(() => {
     const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
@@ -261,7 +266,7 @@ export default function CinematicHero() {
             className="text-sm tracking-[0.25em] uppercase mb-8"
             style={{ color: 'hsl(240 4% 66%)', fontFamily: "'Instrument Serif', serif", }}
           >
-            Loading Den Experience
+            Loading Experience
           </p>
           <div className="w-48 h-px" style={{ background: 'hsl(0 0% 18%)' }}>
             <div
@@ -379,7 +384,7 @@ export default function CinematicHero() {
                     className="text-base sm:text-lg max-w-2xl mt-8 leading-relaxed"
                     style={{ color: 'hsl(var(--muted-foreground))', fontFamily: 'var(--font-body)' }}
                   >
-                    Prison Experience in a Cafe
+                    Where history meets brunch
                   </motion.p>
                 </div>
 
@@ -413,16 +418,17 @@ export default function CinematicHero() {
                         letterSpacing: '-1.5px',
                       }}
                     >
-                      Prison Experience <br /> in a Cafe
+                      Where History <br /> Meets Brunch
                     </h1>
 
                     <div className="flex flex-col md:flex-row gap-2 md:gap-4 justify-center mt-5 w-full sm:w-full">
-                      <div className="block sm:hidden w-full"><GlowButton small fullWidth>Book a Table</GlowButton></div>
-                      <div className="hidden sm:block"><GlowButton>Book a Table</GlowButton></div>
+                      <div className="block sm:hidden w-full"><GlowButton small fullWidth onClick={() => scrollToSection('contact')}>Book a Table</GlowButton></div>
+                      <div className="hidden sm:block"><GlowButton onClick={() => scrollToSection('contact')}>Book a Table</GlowButton></div>
 
                       {/* Secondary — glass */}
                       <button
                         className="liquid-glass rounded-full text-xs font-medium px-2 py-1.5 sm:text-base sm:px-10 sm:py-3"
+                        onClick={() => scrollToSection('menu')}
                         style={{
                           color: 'hsl(var(--foreground))',
                           fontFamily: 'var(--font-body)',
@@ -444,7 +450,7 @@ export default function CinematicHero() {
                           (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)';
                         }}
                       >
-                        Explore Cafe
+                        Explore Menu
                       </button>
                     </div>
                   </div>

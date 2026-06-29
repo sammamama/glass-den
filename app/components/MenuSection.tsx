@@ -29,32 +29,33 @@ type Category = {
 
 const MENU: Category[] = [
   {
-    label: 'Starters',
+    label: 'Brunch',
     items: [
       {
-        name: "The Warden's Welcome",
-        description: 'Chilled burrata, roasted cherry tomatoes, basil oil, grilled sourdough. Served the way the warden likes it — without conversation.',
-        price: '₹480',
+        name: 'Avo Rose',
+        description: 'Smashed avocado sculpted into a rose, heirloom tomatoes, feta crumble, poached egg, sourdough. The dish that put us on the map.',
+        price: 'A$28.50',
         tag: "Chef's Pick",
         image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/52/8d/c4/avocado-garden.jpg?w=1400&h=-1&s=1',
       },
       {
-        name: 'Solitary Soup',
-        description: 'Slow-cooked French onion, aged Gruyère crust, toasted baguette. Forty-eight hours in isolation never tasted so good.',
-        price: '₹340',
+        name: 'Lobster Benedict',
+        description: 'Tail-on lobster, shokupan toast, poached eggs, sriracha mayo, yuzu hollandaise. Worth every cent of your freedom.',
+        price: 'A$34',
+        tag: 'Signature',
         image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/53/7b/ec/photo0jpg.jpg?w=1400&h=-1&s=1',
       },
       {
-        name: 'Cell Block Crostini',
-        description: 'Whipped ricotta, fig preserve, candied walnuts, micro herbs. Four on the plate — one for each wall.',
-        price: '₹420',
+        name: 'Beetroot Hotcakes',
+        description: 'Vibrant beetroot-infused hotcakes, berry compote, mascarpone, maple syrup, edible flowers. Photogenic and delicious.',
+        price: 'A$26',
         image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/8e/93/4d/photo0jpg.jpg?w=1400&h=-1&s=1',
       },
       {
-        name: 'Contraband Tartare',
-        description: 'Hand-cut beef tenderloin, capers, cornichon, quail yolk, rye crisps. Smuggled in at great personal risk.',
-        price: '₹680',
-        tag: 'Signature',
+        name: 'Bee in the Garden',
+        description: 'Belgian waffles, vanilla bean ice cream, honeycomb, seasonal berries, pistachio crumble. Sweet escape.',
+        price: 'A$30.90',
+        tag: 'Best Seller',
         image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80&fit=crop&auto=format',
       },
     ],
@@ -63,47 +64,47 @@ const MENU: Category[] = [
     label: 'Mains',
     items: [
       {
-        name: 'The Rehabilitation',
-        description: 'Pan-seared salmon, saffron beurre blanc, wilted spinach, crushed potatoes. A second chance on a plate.',
-        price: '₹920',
+        name: 'Braised Beef Cheek Roti',
+        description: 'Slow-braised beef cheek, house-made roti, kale, poached eggs, chimichurri. Eight hours in the making.',
+        price: 'A$31',
         tag: 'Best Seller',
       },
       {
-        name: 'Hard Labour Risotto',
-        description: 'Slow-stirred porcini risotto, aged parmesan, truffle oil, crispy shallots. Twenty-two minutes of unbroken effort.',
-        price: '₹780',
+        name: 'Wild Mushroom & Truffle',
+        description: 'Sautéed wild mushrooms, truffle oil, polenta, poached eggs, parmesan shavings, micro herbs.',
+        price: 'A$27',
       },
       {
-        name: 'Maximum Security Steak',
-        description: '200g prime wagyu striploin, bone marrow butter, roasted garlic jus, hand-cut fries. No parole. No exceptions.',
-        price: '₹1,840',
+        name: 'Lobster Squid Ink Pasta',
+        description: 'House-made squid ink linguine, lobster tail, cherry tomatoes, white wine cream, chilli flakes.',
+        price: 'A$36',
         tag: 'Premium',
       },
       {
-        name: 'The Accomplice',
-        description: 'Slow-braised lamb shank, rosemary jus, pomme purée, roasted root vegetables. Partners in flavour.',
-        price: '₹1,100',
+        name: 'Green Tea Soba',
+        description: 'Chilled matcha soba noodles, sesame dressing, edamame, pickled ginger, soft-boiled egg, nori.',
+        price: 'A$24',
       },
     ],
   },
   {
-    label: 'Desserts',
+    label: 'Light Bites',
     items: [
       {
-        name: 'Midnight Craving',
-        description: 'Warm dark chocolate fondant, salted caramel core, vanilla bean ice cream. What everyone thinks about after lights out.',
-        price: '₹380',
+        name: 'Smoked Salmon Bagel',
+        description: 'House-cured smoked salmon, cream cheese, capers, red onion, dill, toasted everything bagel.',
+        price: 'A$22',
         tag: "Chef's Pick",
       },
       {
-        name: 'Good Behaviour Panna Cotta',
-        description: 'Vanilla panna cotta, passionfruit coulis, sesame brittle. Reserved only for those who behave.',
-        price: '₹320',
+        name: 'Garlic Polenta Oyster Mushrooms',
+        description: 'Crumbed oyster mushrooms, garlic polenta, sriracha aioli, rocket, balsamic glaze.',
+        price: 'A$19',
       },
       {
-        name: 'The Last Meal',
-        description: 'Tasting plate of miniature desserts — chosen by you. Because some choices should remain yours.',
-        price: '₹560',
+        name: 'Porridge Bowl',
+        description: 'Slow-cooked oats, poached pear, wild berries, orange zest, banana, coconut flakes, honey.',
+        price: 'A$18',
         tag: 'Signature',
       },
     ],
@@ -112,26 +113,26 @@ const MENU: Category[] = [
     label: 'Drinks',
     items: [
       {
-        name: 'Yard Time',
-        description: 'Cold brew concentrate, oat milk, brown sugar syrup, a single ice cube. Fifteen minutes of calm.',
-        price: '₹280',
+        name: 'Signature Iced Coffee',
+        description: 'Frozen Code Black espresso ball, your choice of milk — pour and watch it bloom. Our signature ritual.',
+        price: 'A$8.50',
         tag: 'Best Seller',
       },
       {
-        name: 'The Informant',
-        description: 'Matcha, yuzu, honey, sparkling water. Disarmingly good. Never to be trusted.',
-        price: '₹320',
-      },
-      {
-        name: 'Sentence Suspended',
-        description: 'Espresso tonic, grapefruit zest, rosemary sprig. Served cold. Case closed.',
-        price: '₹340',
+        name: 'Iced Taro',
+        description: 'House-made taro blend, oat milk, butterfly pea, vanilla. Purple, creamy, unforgettable.',
+        price: 'A$8.50',
         tag: 'Signature',
       },
       {
-        name: 'Classified',
-        description: 'Rotating seasonal special. Ask your server. Details are on a need-to-know basis.',
-        price: '₹360',
+        name: 'Watermelon Crush',
+        description: 'Fresh watermelon, mint, lime, sparkling water. Summer in a glass, any time of year.',
+        price: 'A$9',
+      },
+      {
+        name: 'Flat White',
+        description: 'Code Black double ristretto, silky steamed milk. The Melbourne standard, perfected.',
+        price: 'A$5.50',
       },
     ],
   },
@@ -268,10 +269,11 @@ export default function MenuSection() {
   const headingInView = useInView(headingRef, { once: true, margin: '-80px' });
 
   const activeItems = MENU[activeCategory].items;
-  const isStarters = activeCategory === 0;
+  const isBrunch = activeCategory === 0;
 
   return (
     <section
+      id="menu"
       className="relative w-full py-24 px-4 sm:px-10 bg-white"
       style={{
         background: 'url(/menu.png)',
@@ -306,12 +308,12 @@ export default function MenuSection() {
               borderBottom: `1px solid ${L.border}`,
             }}
           >
-            {/* Heading row */}
+            {/* Heading + category tabs on one row */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={headingInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6"
+              className="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
               <div>
                 <p
@@ -327,46 +329,33 @@ export default function MenuSection() {
                   The Menu.
                 </h2>
               </div>
-              <p
-                className="text-sm max-w-xs leading-relaxed text-right hidden sm:block"
-                style={{ fontFamily: 'var(--font-body)', color: L.muted }}
-              >
-                Crafted for those who have earned their appetite. Every dish carries a sentence of its own.
-              </p>
-            </motion.div>
-
-            {/* Category tabs */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={headingInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="flex flex-wrap gap-2"
-            >
-              {MENU.map((cat, i) => {
-                const active = activeCategory === i;
-                return (
-                  <button
-                    key={cat.label}
-                    onClick={() => setActiveCategory(i)}
-                    className="rounded-full px-6 py-2.5 text-sm transition-all duration-200"
-                    style={{
-                      fontFamily: 'var(--font-body)',
-                      cursor: 'pointer',
-                      color: active ? L.text : L.muted,
-                      background: active ? 'rgba(0,0,0,0.08)' : 'transparent',
-                      border: active ? '1px solid rgba(0,0,0,0.14)' : '1px solid rgba(0,0,0,0.07)',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!active) (e.currentTarget as HTMLElement).style.color = L.text;
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!active) (e.currentTarget as HTMLElement).style.color = L.muted;
-                    }}
-                  >
-                    {cat.label}
-                  </button>
-                );
-              })}
+              <div className="flex flex-wrap gap-2">
+                {MENU.map((cat, i) => {
+                  const active = activeCategory === i;
+                  return (
+                    <button
+                      key={cat.label}
+                      onClick={() => setActiveCategory(i)}
+                      className="rounded-full px-6 py-2.5 text-sm transition-all duration-200"
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        cursor: 'pointer',
+                        color: active ? L.text : L.muted,
+                        background: active ? 'rgba(0,0,0,0.08)' : 'transparent',
+                        border: active ? '1px solid rgba(0,0,0,0.14)' : '1px solid rgba(0,0,0,0.07)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!active) (e.currentTarget as HTMLElement).style.color = L.text;
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!active) (e.currentTarget as HTMLElement).style.color = L.muted;
+                      }}
+                    >
+                      {cat.label}
+                    </button>
+                  );
+                })}
+              </div>
             </motion.div>
           </div>
 
@@ -390,7 +379,7 @@ export default function MenuSection() {
               transition={{ duration: 0.25 }}
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
-              {isStarters
+              {isBrunch
                 ? activeItems.map((item, i) => <ImageCard key={item.name} item={item} index={i} />)
                 : activeItems.map((item, i) => <TextCard key={item.name} item={item} index={i} />)
               }
@@ -401,10 +390,10 @@ export default function MenuSection() {
           <div className="mt-12 w-full h-px" style={{ background: L.rule }} />
           <div className="mt-5 flex flex-col sm:flex-row justify-between gap-2">
             <p className="text-xs" style={{ fontFamily: 'var(--font-body)', color: L.muted, opacity: 0.5 }}>
-              All prices inclusive of taxes. Sentence subject to change.
+              All prices in AUD, inclusive of GST. Menu subject to seasonal changes.
             </p>
             <p className="text-xs" style={{ fontFamily: 'var(--font-body)', color: L.muted, opacity: 0.5 }}>
-              Velorah &copy; {new Date().getFullYear()}
+              The Glass Den &copy; {new Date().getFullYear()}
             </p>
           </div>
           </div>{/* end scrollable content */}

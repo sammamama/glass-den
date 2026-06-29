@@ -13,7 +13,14 @@
       "PowerShell(Stop-Process -Id 12012 -Force)",
       "Read(//c/Users/samri/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.5.0/**)",
       "Bash(python skills/ui-ux-pro-max/scripts/search.py \"luxury dark cafe menu editorial glassmorphism\" --design-system -p \"Glass Den\")",
-      "Bash(python src/ui-ux-pro-max/scripts/search.py \"luxury dark cafe menu editorial glassmorphism\" --design-system -p \"Glass Den\")"
+      "Bash(python src/ui-ux-pro-max/scripts/search.py \"luxury dark cafe menu editorial glassmorphism\" --design-system -p \"Glass Den\")",
+      "WebSearch",
+      "WebFetch(domain:www.broadsheet.com.au)",
+      "WebFetch(domain:www.agfg.com.au)",
+      "WebFetch(domain:eatswithash.com)",
+      "WebFetch(domain:www.scoffermag.au)",
+      "WebFetch(domain:www.yelp.com)",
+      "Bash(npx next *)"
     ]
   }
 }

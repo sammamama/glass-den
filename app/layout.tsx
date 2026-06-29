@@ -16,8 +16,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Glass Den",
-  description: "Prison Experience in a Cafe",
+  title: "The Glass Den",
+  description:
+    "A modern brunch cafe housed in the historic Pentridge Prison gatehouse. Coburg, Melbourne.",
+  openGraph: {
+    title: "The Glass Den",
+    description:
+      "A modern brunch cafe housed in the historic Pentridge Prison gatehouse. Coburg, Melbourne.",
+    siteName: "The Glass Den",
+    locale: "en_AU",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Glass Den",
+    description:
+      "A modern brunch cafe housed in the historic Pentridge Prison gatehouse. Coburg, Melbourne.",
+  },
 };
 
 export default function RootLayout({
